@@ -54,6 +54,10 @@ body.home.page h1.entry-title {
     width: auto;
 }
 
+a:focus, button:focus, .button.alt:focus {
+    outline: none;
+}
+
 @media screen and ( min-width: 768px ) {
     .site-header .col-full {
         float: none;

@@ -78,4 +78,29 @@ class ThemeSetup {
 
 		return $editor_color_palette;
 	}
+
+	/**
+	 * Check if the dependency of this plugin is satisfied
+	 *
+	 * @return bool
+	 */
+	public static function check_dependency() {
+		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
+			require_once ABSPATH . '/wp-admin/includes/plugin.php';
+		}
+		$site_plugins = apply_filters( 'active_plugins', get_option( 'active_plugins' ) );
+		$dependency   = 'woocommerce/woocommerce.php';
+		if ( is_multisite() ) {
+
+			if ( is_plugin_active_for_network( $dependency ) ) {
+				return true;
+			}
+		}
+		if ( stripos( implode( $site_plugins ), $dependency ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
 }

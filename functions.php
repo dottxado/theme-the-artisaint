@@ -1,10 +1,16 @@
 <?php
+
+use dottxado\theartisaint\StorefrontMods;
+use dottxado\theartisaint\ThemeDocumentation;
+use dottxado\theartisaint\ThemeSetup;
+use dottxado\theartisaint\WoocommerceMods;
+
 require 'vendor/autoload.php';
 
-\dottxado\theartisaint\ThemeSetup::get_instance();
-\dottxado\theartisaint\ThemeDocumentation::get_instance();
+ThemeSetup::get_instance();
+ThemeDocumentation::get_instance();
 
-if (\dottxado\theartisaint\ThemeSetup::check_dependency()) {
-	\dottxado\theartisaint\StorefrontMods::get_instance();
-	\dottxado\theartisaint\WoocommerceMods::get_instance();
+if ( ThemeSetup::check_dependency() ) {
+	StorefrontMods::get_instance();
+	WoocommerceMods::get_instance();
 }

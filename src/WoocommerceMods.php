@@ -1,7 +1,17 @@
 <?php
+/**
+ * Customizations for WooCommerce
+ *
+ * @package dottxado\theartisaint
+ */
 
 namespace dottxado\theartisaint;
 
+/**
+ * Class WoocommerceMods
+ *
+ * @package dottxado\theartisaint
+ */
 class WoocommerceMods {
 	/**
 	 * Singleton instance
@@ -24,21 +34,18 @@ class WoocommerceMods {
 		return self::$instance;
 	}
 
+	/**
+	 * WoocommerceMods constructor.
+	 */
 	private function __construct() {
-		//add_filter( 'woocommerce_show_page_title', array( $this, 'hide_shop_page_title' ) );
 		add_action( 'wp', array( $this, 'remove_actions' ) );
 	}
 
+	/**
+	 * Remove WooCommerce actions
+	 */
 	public function remove_actions() {
-
 		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 	}
 
-	public function hide_shop_page_title() {
-		if ( is_shop() && is_post_type_archive( 'product' ) ) {
-			return false;
-		}
-
-		return true;
-	}
 }

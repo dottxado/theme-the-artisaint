@@ -1,7 +1,17 @@
 <?php
+/**
+ * All the necessary to setup the theme
+ *
+ * @package dottxado\theartisaint
+ */
 
 namespace dottxado\theartisaint;
 
+/**
+ * Class ThemeSetup
+ *
+ * @package dottxado\theartisaint
+ */
 class ThemeSetup {
 
 	/**
@@ -25,6 +35,9 @@ class ThemeSetup {
 		return self::$instance;
 	}
 
+	/**
+	 * ThemeSetup constructor.
+	 */
 	private function __construct() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'after_setup_theme', array( $this, 'theme_setup' ), 11 );
@@ -32,10 +45,21 @@ class ThemeSetup {
 		add_filter( 'storefront_customizer_css', array( $this, 'add_gutenberg_palette' ), 1000 );
 	}
 
+	/**
+	 * Enqueue parent theme style
+	 */
 	public function enqueue_styles() {
-		wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
+		wp_enqueue_style(
+			'parent-style',
+			get_template_directory_uri() . '/style.css',
+			array(),
+			filemtime( get_template_directory() . '/style.css' )
+		);
 	}
 
+	/**
+	 * Setups for the child theme
+	 */
 	public function theme_setup() {
 		load_theme_textdomain( 'dottxado-the-artisaint', get_stylesheet_directory() . '/languages' );
 		add_theme_support(
@@ -45,12 +69,22 @@ class ThemeSetup {
 
 	}
 
+	/**
+	 * Add google fonts
+	 */
 	public function add_fonts() {
 		?>
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
 		<?php
 	}
 
+	/**
+	 * Add to the inline style the classes for the palette used in Gutenberg
+	 *
+	 * @param string $style The default style.
+	 *
+	 * @return string
+	 */
 	public function add_gutenberg_palette( $style ) {
 		$palette = $this->get_palette_colors_for_gutenberg();
 		$tmp     = '';
@@ -62,6 +96,10 @@ class ThemeSetup {
 		return $style . $tmp;
 	}
 
+	/**
+	 * Get the palette configured into the customizer
+	 * @return array
+	 */
 	private function get_palette_colors_for_gutenberg() {
 		$palette              = StorefrontMods::get_storefront_theme_mods();
 		$palette              = array_unique( array_values( $palette ) );
@@ -80,7 +118,7 @@ class ThemeSetup {
 	}
 
 	/**
-	 * Check if the dependency of this plugin is satisfied
+	 * Check if the dependency of this theme is satisfied
 	 *
 	 * @return bool
 	 */

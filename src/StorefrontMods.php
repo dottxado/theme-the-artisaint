@@ -1,7 +1,17 @@
 <?php
+/**
+ * Customizations for Storefront
+ *
+ * @package dottxado\theartisaint
+ */
 
 namespace dottxado\theartisaint;
 
+/**
+ * Class StorefrontMods
+ *
+ * @package dottxado\theartisaint
+ */
 class StorefrontMods {
 
 	/**
@@ -25,19 +35,31 @@ class StorefrontMods {
 		return self::$instance;
 	}
 
+	/**
+	 * StorefrontMods constructor.
+	 */
 	private function __construct() {
-		add_filter( 'storefront_credit_link', array( $this, 'delete_credits' ) );
+		add_filter( 'storefront_credit_link', __return_false() );
 		add_filter( 'storefront_customizer_css', array( $this, 'added_inline_css_customizations' ), 999 );
-		add_filter( 'storefront_customizer_woocommerce_css', array( $this, 'added_inline_woo_css_customizations' ),
-			999 );
+		add_filter(
+			'storefront_customizer_woocommerce_css',
+			array(
+				$this,
+				'added_inline_woo_css_customizations',
+			),
+			999
+		);
 		add_action( 'storefront_footer', 'storefront_footer_widgets', 30 );
-		add_filter( 'storefront_copyright_text', array( $this, 'delete_copyright_text' ) );
+		add_filter( 'storefront_copyright_text', __return_empty_string() );
 		add_filter( 'storefront_credit_links_output', array( $this, 'add_logo_in_footer' ) );
 		add_action( 'wp', array( $this, 'remove_actions' ) );
 		add_filter( 'wp_nav_menu_args', array( $this, 'add_my_account_to_secondary_menu' ) );
-		add_action('storefront_header', 'storefront_header_cart', 31);
+		add_action( 'storefront_header', 'storefront_header_cart', 31 );
 	}
 
+	/**
+	 * Remove Storefront actions
+	 */
 	public function remove_actions() {
 		remove_action( 'storefront_footer', 'storefront_footer_widgets', 10 );
 		remove_action( 'woocommerce_before_shop_loop', 'storefront_sorting_wrapper', 9 );
@@ -47,29 +69,29 @@ class StorefrontMods {
 		remove_action( 'woocommerce_before_shop_loop', 'storefront_sorting_wrapper_close', 31 );
 		remove_action( 'woocommerce_after_shop_loop', 'woocommerce_catalog_ordering', 10 );
 		remove_action( 'woocommerce_after_shop_loop', 'woocommerce_result_count', 20 );
-		remove_action('storefront_header', 'storefront_header_cart', 60);
+		remove_action( 'storefront_header', 'storefront_header_cart', 60 );
 	}
 
-	public function delete_credits() {
-		return false;
-	}
-
-	public function delete_copyright_text( $text ) {
-		return '';
-	}
-
+	/**
+	 * Display the site logo in footer instead of the text
+	 *
+	 * @param string $text The default text to be displayed.
+	 *
+	 * @return string
+	 */
 	public function add_logo_in_footer( $text ) {
 		if ( function_exists( 'the_custom_logo' ) && has_custom_logo() ) {
-			$logo = get_custom_logo();
 
-			return $logo;
+			return get_custom_logo();
 		}
 
 		return '';
 	}
 
 	/**
-	 * Get Customizer css.
+	 * Add inline style to Storefront for WooCommerce
+	 *
+	 * @param string $style The default style.
 	 *
 	 * @return string $styles the css
 	 * @since 2.4.0
@@ -119,6 +141,13 @@ class StorefrontMods {
 		return apply_filters( 'storefront_theme_mods', $storefront_theme_mods );
 	}
 
+	/**
+	 * Add inline style to Storefront
+	 *
+	 * @param string $style The default style.
+	 *
+	 * @return string
+	 */
 	public function added_inline_css_customizations( $style ) {
 		$storefront_theme_mods = self::get_storefront_theme_mods();
 		$brighten_factor       = apply_filters( 'storefront_brighten_factor', 25 );
@@ -177,16 +206,23 @@ class StorefrontMods {
 				}
 			}
 			';
-
 	}
 
+	/**
+	 * Add the link for "My Account" to the Storefront secondary menu
+	 *
+	 * @param array $args The menu arguments.
+	 *
+	 * @return mixed
+	 */
 	public function add_my_account_to_secondary_menu( $args ) {
 		if ( 'secondary' !== $args['theme_location'] ) {
 			return $args;
 		}
 
-		$account_link = '<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="' . get_permalink( get_option('woocommerce_myaccount_page_id') ) . '"><i class="fas fa-user"></i></a></li>';
+		$account_link       = '<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="' . get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) . '"><i class="fas fa-user"></i></a></li>';
 		$args['items_wrap'] = '<ul id="%1$s" class="%2$s">%3$s' . $account_link . '</ul>';
+
 		return $args;
 	}
 

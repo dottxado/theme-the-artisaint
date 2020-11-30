@@ -39,7 +39,7 @@ class StorefrontMods {
 	 * StorefrontMods constructor.
 	 */
 	private function __construct() {
-		add_filter( 'storefront_credit_link', __return_false() );
+		add_filter( 'storefront_credit_link', '__return_false' );
 		add_filter( 'storefront_customizer_css', array( $this, 'added_inline_css_customizations' ), 999 );
 		add_filter(
 			'storefront_customizer_woocommerce_css',
@@ -50,7 +50,7 @@ class StorefrontMods {
 			999
 		);
 		add_action( 'storefront_footer', 'storefront_footer_widgets', 30 );
-		add_filter( 'storefront_copyright_text', __return_empty_string() );
+		add_filter( 'storefront_copyright_text', '__return_empty_string' );
 		add_filter( 'storefront_credit_links_output', array( $this, 'add_logo_in_footer' ) );
 		add_action( 'wp', array( $this, 'remove_actions' ) );
 		add_filter( 'wp_nav_menu_args', array( $this, 'add_my_account_to_secondary_menu' ) );

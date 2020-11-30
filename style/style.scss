@@ -1,0 +1,46 @@
+/*!
+ Theme Name:     The ArtiSaint custom theme
+ Theme URI:      https://theartisaint.com
+ Description:    Custom child theme for The ArtiSaint based on Storefront
+ Author:         Erika Gili
+ Author URI:     https://theartisaint.com
+ Template:       storefront
+ Version:        1.0.0
+ Text Domain:    dottxado-the-artisaint
+*/
+
+@import "variables";
+@import "mixins";
+@import "helpers";
+
+@import "storefront";
+@import "coblocks";
+
+body {
+	font-family: 'Poppins', sans-serif;
+	padding-top: $header-height;
+}
+
+.entry-content {
+	margin-top: 20px;
+}
+
+#menu-primary {
+	text-transform: uppercase;
+	font-weight: 700;
+	display: flex;
+}
+
+.widget_shopping_cart {
+	background-color: #fff;
+	box-shadow: rgba(0, 0, 0, 0.20) 1.95px 1.95px 2.6px;
+	border-radius: 3px;
+}
+
+#colophon .site-info {
+	padding-bottom: 0;
+}
+
+#colophon .site-info .custom-logo {
+	width: 200px;
+}

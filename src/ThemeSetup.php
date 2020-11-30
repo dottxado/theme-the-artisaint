@@ -40,6 +40,7 @@ class ThemeSetup {
 	 */
 	private function __construct() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'after_setup_theme', array( $this, 'theme_setup' ), 11 );
 		add_action( 'wp_head', array( $this, 'add_fonts' ) );
 		add_filter( 'storefront_customizer_css', array( $this, 'add_gutenberg_palette' ), 1000 );
@@ -54,6 +55,19 @@ class ThemeSetup {
 			get_template_directory_uri() . '/style.css',
 			array(),
 			filemtime( get_template_directory() . '/style.css' )
+		);
+	}
+
+	/**
+	 * Enqueue public scripts
+	 */
+	public function enqueue_scripts() {
+		wp_enqueue_script(
+			'artisaint-scripts',
+			get_stylesheet_directory_uri() . '/scripts.min.js',
+			array( 'jquery' ),
+			filemtime( get_stylesheet_directory() . '/scripts.min.js' ),
+			true
 		);
 	}
 
@@ -98,6 +112,7 @@ class ThemeSetup {
 
 	/**
 	 * Get the palette configured into the customizer
+	 *
 	 * @return array
 	 */
 	private function get_palette_colors_for_gutenberg() {

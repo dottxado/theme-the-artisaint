@@ -6,6 +6,9 @@
 	top: 0;
 	left: 0;
 	right: 0;
+	@at-root body.admin-bar & {
+		top: $admin-bar-height;
+	}
 	transition: all 0.5s ease-in-out;
 	&.scroll-to-top {
 		transform: translateY(-100%);

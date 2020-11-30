@@ -16,11 +16,14 @@
 	margin-bottom: 10px;
 }
 
-body.home.page #content .col-full {
-	max-width: none;
-	padding: 0;
-	margin-left: 0;
-	margin-right: 0;
+body.home.page #content {
+	margin-top: 20px;
+	.col-full {
+		max-width: none;
+		padding: 0;
+		margin-left: 0;
+		margin-right: 0;
+	}
 }
 
 .site-header-cart .cart-contents {

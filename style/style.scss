@@ -21,8 +21,12 @@ body {
 	padding-top: $header-height;
 }
 
-.entry-content {
-	margin-top: 20px;
+.content-area {
+	.entry-content {
+		max-width: unset;
+		margin-left: 0;
+		margin-right: 0;
+	}
 }
 
 #menu-primary {

@@ -43,6 +43,7 @@ class ThemeSetup {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'after_setup_theme', array( $this, 'theme_setup' ), 11 );
 		add_action( 'wp_head', array( $this, 'add_fonts' ) );
+		add_action( 'wp_head', array( $this, 'add_masonry' ) );
 		add_filter( 'storefront_customizer_css', array( $this, 'add_gutenberg_palette' ), 1000 );
 	}
 
@@ -89,6 +90,15 @@ class ThemeSetup {
 	public function add_fonts() {
 		?>
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+		<?php
+	}
+
+	/**
+	 * Included masonry library
+	 */
+	public function add_masonry() {
+		?>
+		<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 		<?php
 	}
 

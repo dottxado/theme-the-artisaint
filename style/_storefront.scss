@@ -36,7 +36,7 @@ body.home.page #content {
 		}
 	}
 	@include breakpoint(more-sm) {
-		padding-top: 0.85em;
+		padding-top: 0.9em;
 		padding-bottom: 0.85em;
 		line-height: 1em;
 		margin-right: 10px;
@@ -85,6 +85,20 @@ a:focus, button:focus, .button.alt:focus {
 .woocommerce-active .site-header .site-search {
 	@include breakpoint(more-sm) {
 		margin-bottom: 0;
+		display: flex;
+		align-items: center;
+	}
+
+	.search-field {
+		@include breakpoint(more-sm) {
+			padding-top: 0.4em;
+			padding-bottom: 0.4em;
+		}
+	}
+	.widget_product_search form::before {
+		@include breakpoint(more-sm) {
+			top: 0.6em;
+		}
 	}
 }
 
@@ -95,3 +109,8 @@ a:focus, button:focus, .button.alt:focus {
 	}
 }
 
+.site-header {
+	.menu a{
+		font-size: 16px;
+	}
+}

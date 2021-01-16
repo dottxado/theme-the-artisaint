@@ -105,6 +105,12 @@ class ThemeDocumentation {
 				<li>
 					Aggiunto il font Poppins ed utilizzato su tutto il sito
 				</li>
+				<li>
+					Allargato lo spazio a disposizione dei contenuti nella pagina di categoria di WooCommerce
+				</li>
+				<li>
+					Aggiunto effetto al menu che lo fa sparire in caso di scroll in basso e lo fa ricomparire con scroll in alto
+				</li>
 			</ul>
 
 			<h4>Personalizzazioni di CoBlocks</h4>
@@ -128,6 +134,9 @@ class ThemeDocumentation {
 		<ul>
 			<li>
 				Rimossi contenuti "meta" (SKU, tag e categorie) dalla pagina del singolo prodotto
+			</li>
+			<li>
+				Aggiunta libreria per effetto "masonry" nella pagina di archivio dei prodotti, con compatibilità nel caso di visualizzazione di prodotti in 2, 3, 4, 5 e 6 colonne (vedi Customizer -> WooCommerce -> Product Catalog -> Products per row)
 			</li>
 		</ul>
 		<?php

@@ -47,10 +47,21 @@ body {
 	border-radius: 3px;
 }
 
-#colophon .site-info {
-	padding-bottom: 0;
+#colophon {
+
+	.col-full {
+		max-width: none;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	.site-info {
+		padding-bottom: 0;
+		padding-top: 0;
+
+		.custom-logo {
+			width: 200px;
+		}
+	}
 }
 
-#colophon .site-info .custom-logo {
-	width: 200px;
-}
